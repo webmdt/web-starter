@@ -36,7 +36,8 @@ Squash-merge PRs so `main` history is one commit per change.
 - One concern per PR. Under ~400 changed lines is the goal.
 - Fill in the template: what, why, how to verify.
 - CI must be green. Do not merge with failing or skipped checks.
-- At least one approving review. The author never approves their own PR.
+- Every PR has a named reviewer on its Paperclip/ClickUp task, and that reviewer signs off on the task before merge. For client work the reviewer is QA Engineer (QA gate); Marco's approval goes through Head Honcho before anything launches.
+- GitHub's own "required reviews" setting is 0 for now: the agency has a single GitHub identity, so the approve button cannot be pressed by anyone but the author. The review happens on the task, not in GitHub. Restore the GitHub rule to 1 once a second GitHub identity exists.
 - Resolve every review thread before merging.
 
 ## Local checks

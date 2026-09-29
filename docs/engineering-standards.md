@@ -21,8 +21,8 @@ One page. Every rule here is either **[CI]** enforced automatically on each pull
 
 A change is done when all of these are true:
 
-- [ ] PR merged to `main` via squash with green CI (lint, format, typecheck, tests, build). **[CI]**
-- [ ] At least one approving review from someone other than the author; all threads resolved. **[Review]**
+- [ ] PR merged to `main` via squash with green CI (lint, format, typecheck, tests, build) and a named reviewer sign-off on the task. **[CI]** for the checks; **[Review]** for the sign-off.
+- [ ] Reviewer is someone other than the author and is named on the Paperclip/ClickUp task; all PR threads resolved. **[Review]**
 - [ ] Behaviour verified by the steps in the PR's "How to verify" section, by the reviewer or QA. **[Review]**
 - [ ] New or changed behaviour covered by tests, or the PR states why not. **[Review]**
 - [ ] Docs, `README`, `.env.example` and `src/env.ts` updated for anything a new developer would need. **[Review]**
