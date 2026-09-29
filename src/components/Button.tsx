@@ -15,7 +15,7 @@ export function Button({ variant = "primary", className, type = "button", ...pro
         variant === "primary" &&
           "bg-zinc-900 text-white hover:bg-zinc-700 focus-visible:ring-zinc-900",
         variant === "secondary" &&
-          "border border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-50 focus-visible:ring-zinc-400",
+          "border border-zinc-500 bg-white text-zinc-900 hover:bg-zinc-50 focus-visible:ring-zinc-400",
         className,
       )}
       {...props}

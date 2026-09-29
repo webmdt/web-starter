@@ -29,19 +29,20 @@ pnpm dev                      # http://localhost:3000
 
 ## Scripts
 
-| Command             | What it does                                                       |
-| ------------------- | ------------------------------------------------------------------ |
-| `pnpm dev`          | Start the dev server                                               |
-| `pnpm build`        | Production build                                                   |
-| `pnpm start`        | Serve the production build                                         |
-| `pnpm lint`         | ESLint (Next.js core-web-vitals + TypeScript + a11y rules)         |
-| `pnpm lint:fix`     | ESLint with auto-fix                                               |
-| `pnpm format`       | Prettier write                                                     |
-| `pnpm format:check` | Prettier check (what CI runs)                                      |
-| `pnpm typecheck`    | `tsc --noEmit`                                                     |
-| `pnpm test`         | Vitest, single run                                                 |
-| `pnpm test:watch`   | Vitest in watch mode                                               |
-| `pnpm check`        | Everything CI runs, in order: lint, format, typecheck, test, build |
+| Command              | What it does                                                       |
+| -------------------- | ------------------------------------------------------------------ |
+| `pnpm dev`           | Start the dev server                                               |
+| `pnpm build`         | Production build                                                   |
+| `pnpm start`         | Serve the production build                                         |
+| `pnpm lint`          | ESLint (Next.js core-web-vitals + TypeScript + a11y rules)         |
+| `pnpm lint:fix`      | ESLint with auto-fix                                               |
+| `pnpm format`        | Prettier write                                                     |
+| `pnpm format:check`  | Prettier check (what CI runs)                                      |
+| `pnpm typecheck`     | `tsc --noEmit`                                                     |
+| `pnpm test`          | Vitest, single run                                                 |
+| `pnpm test:watch`    | Vitest in watch mode                                               |
+| `pnpm test:coverage` | Vitest with V8 coverage report (`coverage/`)                       |
+| `pnpm check`         | Everything CI runs, in order: lint, format, typecheck, test, build |
 
 ## Environment variables
 
@@ -49,20 +50,29 @@ All variables are declared and validated in `src/env.ts` with zod and documented
 
 - Browser-visible values must be prefixed `NEXT_PUBLIC_`.
 - Server-only values (database URLs, API keys) must **not** be.
-- Add a variable: update `src/env.ts`, then `.env.example`, then use `env.NAME` in code. Never read `process.env` directly elsewhere.
+- Add a variable, three places in `src/env.ts` and `.env.example`:
+  1. `src/env.ts`: add it to `serverSchema` or `clientSchema`.
+  2. `src/env.ts`: add `NAME: process.env.NAME` to the `parseEnv({ ... })` call at the bottom. Next.js only inlines `NEXT_PUBLIC_*` values that are accessed literally, so this step is required.
+  3. `.env.example`: document it with a placeholder value.
+     Then use `env.NAME` in code. ESLint rejects `process.env` anywhere outside `src/env.ts`.
 
 ## Project layout
 
 ```
-.github/            CI workflow and pull request template
+.github/            CI workflow, PR template, CODEOWNERS
 docs/               Engineering standards
-public/             Static assets
-src/app/            Routes, layouts, global styles (App Router)
+public/             Static assets served from the site root (robots.txt, images)
+src/app/            Routes, layouts, favicon, global styles (App Router)
 src/components/     Reusable UI components (+ tests alongside)
 src/lib/            Framework-agnostic helpers (+ tests alongside)
 src/env.ts          Typed, validated environment variables
-vitest.config.mts   Test runner config (jsdom, Testing Library)
+vitest.config.mts   Test runner config (jsdom, Testing Library, coverage)
+AGENTS.md           Notes for AI coding agents; `next dev` maintains the Next.js block
 ```
+
+## Styling
+
+Tailwind CSS 4, light theme only. Fonts (Geist Sans / Mono) are loaded with `next/font` and exposed as `font-sans` / `font-mono`. To add dark mode, define colour tokens in `src/app/globals.css` and use `dark:` variants; do not add unlayered `body {}` rules, they silently override Tailwind utilities.
 
 ## Testing
 
