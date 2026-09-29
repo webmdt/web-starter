@@ -1,6 +1,6 @@
 ## What changed
 
-<!-- One or two sentences. Link the ticket: WEB-123 / ClickUp URL. -->
+<!-- One or two sentences. Link the ticket, e.g. https://app.clickup.com/t/<task-id> or the Paperclip issue URL. -->
 
 ## Why
 
@@ -19,8 +19,13 @@
 - [ ] `pnpm check` passes locally (lint, format, typecheck, tests, build)
 - [ ] New behaviour has a test, or I explained below why not
 - [ ] No secrets, credentials or customer data in the diff
-- [ ] `.env.example` and `src/env.ts` updated if env vars changed
+- [ ] `.env.example` and `src/env.ts` (schema **and** `parseEnv` call) updated if env vars changed
+- [ ] New dependency? One-line justification below, and no lighter alternative
 - [ ] README / docs updated if setup or behaviour changed
+
+## New dependencies
+
+<!-- Package: why it is needed, why not the platform/framework feature. Delete if none. -->
 
 ## Screenshots / recordings
 

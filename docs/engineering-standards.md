@@ -5,16 +5,16 @@ One page. Every rule here is either **[CI]** enforced automatically on each pull
 ## Coding standards
 
 1. **TypeScript strict, no `any`.** Use `unknown` and narrow. **[CI]** `tsc --noEmit`, `@typescript-eslint/no-explicit-any`.
-2. **Lint clean, Prettier formatted.** No warnings suppressed without a comment explaining why. **[CI]** `eslint`, `prettier --check`.
+2. **Lint clean, Prettier formatted.** Every `eslint-disable` carries a reason (`-- why`). **[CI]** `eslint`, `prettier --check`, `eslint-comments/require-description`.
 3. **No dead code.** No unused variables, imports or exports left behind. **[CI]** `no-unused-vars`; **[Review]** unused exports and files.
 4. **No `console.log` in committed code.** Use `console.warn` / `console.error` deliberately or a logger. **[CI]** `no-console`.
-5. **Environment variables go through `src/env.ts`.** Never read `process.env` elsewhere. Every variable is listed in `.env.example`. Server secrets are never `NEXT_PUBLIC_`. **[Review]**
+5. **Environment variables go through `src/env.ts`.** Never read `process.env` elsewhere. **[CI]** `no-restricted-syntax` on `process.env` outside `src/env.ts`. Every variable is listed in `.env.example`; server secrets are never `NEXT_PUBLIC_`. **[Review]**
 6. **No secrets in the repo.** `.env*` is git-ignored except `.env.example`. **[Review]** any key, token or customer data in the diff blocks the PR.
 7. **Small, named units.** Components and functions do one thing and are named for what they do. Files under ~200 lines; split when bigger. **[Review]**
 8. **Server first.** Default to Server Components; add `"use client"` only where interaction needs it. Data fetching and secrets stay on the server. **[Review]**
 9. **Accessible by default.** Semantic HTML, labelled controls, keyboard reachable, visible focus, images have `alt`. **[CI]** `jsx-a11y` rules via `eslint-config-next`; **[Review]** keyboard walk-through for new UI.
 10. **Tests live next to the code** as `*.test.ts(x)` and run in CI. New logic and bug fixes ship with a test. **[CI]** `vitest run`; **[Review]** test actually asserts the behaviour.
-11. **Dependencies are deliberate.** Prefer platform and framework features. Adding a package needs a one-line justification in the PR. **[CI]** `pnpm install --frozen-lockfile`; **[Review]** justification present.
+11. **Dependencies are deliberate.** Prefer platform and framework features. Adding a package needs a one-line justification in the PR's "New dependencies" section. **[CI]** `pnpm install --frozen-lockfile`; **[Review]** justification present.
 12. **Branch, commit and PR conventions** as in `CONTRIBUTING.md`. **[Review]**
 
 ## Definition of done (code)
